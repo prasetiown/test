@@ -1,0 +1,24 @@
+Function ISR
+    toggle PORTA bit 0
+Endfunction
+
+Function main
+    initialize ADC 0x2000
+    initialize Timer 0x3000
+    initialize PORTA 0x1000
+
+    set timer interrupt handler (Function ISR)
+    timer interrupt start
+
+    declare PORTA bit 0 as output
+    declare PORTA bit 1 as output
+
+    read raw analog
+    convert raw analog read to volt 
+    convert volt to degree
+    if (degree > 20)
+        PORTA bit 1 = 1
+    else
+        PORTA bit 1 = 0
+
+Endfunction
